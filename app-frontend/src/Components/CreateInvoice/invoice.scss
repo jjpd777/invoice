@@ -1,0 +1,65 @@
+@import "~plaid-threads/scss/variables";
+
+.create-inv-box{
+    width: 100%;
+}
+
+.invoice-card {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 2 * $unit;
+  margin-bottom: 2 * $unit;
+}
+
+.invoice-card-header{
+    margin-top: 4 * $unit;
+    font-weight: 800;
+    height: 2 * $unit;
+    color:black;
+    font-size: 2 * $unit;
+
+}
+
+.standard-text-box{
+    margin-bottom: 2*$unit;
+    max-width: 90%;
+}
+
+.invoice-card-body{
+    color:black;
+    width:100%;
+    font-size: 1.5 * $unit;
+
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.invoice-input-boxes{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width:100%;
+}
+
+.standard-input{
+    width: 10 * $unit;
+    margin-inline: $unit;
+
+}
+
+.basket-div{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.financing-toggle{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    max-width: 40%;
+    margin: 0 auto;
+}
