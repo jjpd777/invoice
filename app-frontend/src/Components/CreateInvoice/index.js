@@ -15,7 +15,9 @@ function CreateInvoice() {
 
     const [togg, setToggle] = useState(false);
     const [finance, setFinance] = useState("Zero days");
+    const [cartItems, setCart] = useState([]);
 
+    console.log(cartItems);
     return (
         <div className="create-inv-box">
             <Card className="invoice-card">
@@ -48,7 +50,7 @@ function CreateInvoice() {
                         Please add the products or services to be invoiced.
                     </div>
                     <div className="invoice-input-boxes">
-                        <ItemsBasket></ItemsBasket>
+                        <ItemsBasket cartFunction={setCart} cartItems = {cartItems}></ItemsBasket>
                     </div>
                 </CardBody>
             </Card>
