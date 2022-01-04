@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import "shards-ui/dist/css/shards.min.css";
 import "./invoice.scss";
 import {moneyFormatter, inverseMoney} from "../../Utils/Money";
+import CurrencyInput from 'react-currency-input-field';
+
 
 
 import {
@@ -43,10 +45,10 @@ function ItemsBasket( {cartFunction, cartItems }) {
     };
 
     const updatePriceInput = (item, value)=>{
-        const x = inverseMoney(value);
+
         cartFunction( prevState =>(
             prevState.map( prev =>
-                prev.uid === item.uid ? { ...prev, itemUnitPrice: x} : prev)
+                prev.uid === item.uid ? { ...prev, itemUnitPrice: value} : prev)
             ))
     };
 
@@ -69,22 +71,15 @@ function ItemsBasket( {cartFunction, cartItems }) {
                         onChange={(e)=>{updateQuantityInput(item, e.target.value)}}
                         >
                     </FormInput>
-                    <FormInput placeholder="Unit price ($)"
+                    <CurrencyInput
                         className="standard-input"
-                        value = {moneyFormatter.format(item.itemUnitPrice)}
-                        onChange={(e)=>{
-                            const temp = e.target.value.split("$").join("").split(".").join("")
-                            const checkInt = /^\d+$/.test(temp);
-                            console.log(checkInt);
-                            console.log("Target", e.target.value)
-                            if(checkInt) {
-                                updatePriceInput(item, e.target.value)
-                            }
-
-                            }}
-                        type="text"
-                        >
-                    </FormInput>
+                        placeholder="Please enter a number"
+                        defaultValue={1000}
+                        decimalsLimit={2}
+                        onValueChange={(value, name) => {
+                            updatePriceInput(item, value)
+                            console.log(value, name)}}
+                        />
                     <Badge placeholder="Amount ($)"
                         className="standard-input"
                         type="number"
@@ -104,6 +99,18 @@ function ItemsBasket( {cartFunction, cartItems }) {
             cartFunction(cartItems.filter(x => x.uid!== item.uid))
         };
 
+    const simpleTable = ()=>{
+        return(
+            <Container className="demo-table">
+                <Row>
+                    <Col> 1 header</Col>
+                    <Col> 2 header</Col>
+                    <Col> 3 header</Col>
+                </Row>
+            </Container>
+        )
+    }
+
    
     return (
         <div className="basket-div">
@@ -111,10 +118,21 @@ function ItemsBasket( {cartFunction, cartItems }) {
                 <Button onClick={()=>{insertEmptyRow()}}>
                     Insert item
                 </Button>
+                <Container>
+                <Row>
+                    <Col> Description</Col>
+                    <Col>Units</Col>
+                    <Col>Price per unit</Col>
+                </Row>
+                </Container>
             </div>
+        
             <ListGroup className="basket-table">
                 {cartItems.map(x=>rowItem(x))}
             </ListGroup>
+            <div className="table-1">
+            {simpleTable()}
+            </div>
         </div>
     )
 }

@@ -4,8 +4,11 @@ import "./invoice.scss";
 
 import ItemsBasket from "./ItemsBasket";
 
+import { Row, Col } from 'antd';
+
+
 import {
-    FormInput, Button, FormRadio, Container, Row, Col,
+    FormInput, Button, FormRadio, 
     Dropdown, DropdownToggle,
     DropdownMenu, DropdownItem,
     Card, CardHeader, CardTitle, CardBody, 
@@ -17,9 +20,55 @@ function CreateInvoice() {
     const [finance, setFinance] = useState("Zero days");
     const [cartItems, setCart] = useState([]);
 
+    const simpleTable = ()=>{
+        return(
+                <Row>
+                    <Col> 1 header</Col>
+                    <Col> 2 header</Col>
+                </Row>
+              )
+    };
+
+    const learningTab = ()=>{
+        return(
+            <>
+            <Row>
+                <Col span={24}>col</Col>
+                </Row>
+                <Row>
+                <Col span={12}>col-12</Col>
+                <Col span={12}>col-12</Col>
+            </Row>
+            <Row>
+                <Col span={8}>col-8</Col>
+                <Col span={8}>col-8</Col>
+                <Col span={8}>col-8</Col>
+            </Row>
+            <Row>
+                <Col span={6}>col-6</Col>
+                <Col span={6}>col-6</Col>
+                <Col span={6}>col-6</Col>
+                <Col span={6}>col-6</Col>
+            </Row>
+            </>
+        )
+    }
+
+
     console.log(cartItems);
     return (
         <div className="create-inv-box">
+            {learningTab()}
+            <div>
+            <Dropdown open={togg} toggle={()=>setToggle(!togg)}>
+                <DropdownToggle theme="success">Dropdown</DropdownToggle>
+                <DropdownMenu>
+                <DropdownItem>Action</DropdownItem>
+                <DropdownItem>Another action</DropdownItem>
+                <DropdownItem>Something else here</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
+            </div>
             <Card className="invoice-card">
                 <CardTitle className="invoice-card-header">
                     Buyer Information
